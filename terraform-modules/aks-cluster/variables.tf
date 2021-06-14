@@ -8,4 +8,5 @@ variable "password" {
 
 variable "akscluster" {
   description = "Azure Kubernetes Service Cluster name"
+  default = "nc-cluster-001"
 }

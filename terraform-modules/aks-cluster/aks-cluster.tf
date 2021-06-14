@@ -1,12 +1,11 @@
-resource "azurerm_resource_group" "default" {
-  name     = "nc-games"
-  location = "South Central US"
+data "azurerm_resource_group" "default" {
+  name     = "Games"
 }
 
 resource "azurerm_kubernetes_cluster" "default" {
   name                = "aks-${var.akscluster}"
-  location            = azurerm_resource_group.default.location
-  resource_group_name = azurerm_resource_group.default.name
+  location            = data.azurerm_resource_group.default.location
+  resource_group_name = data.azurerm_resource_group.default.name
   dns_prefix          = "${var.akscluster}-k8s"
 
   default_node_pool {
@@ -17,9 +16,8 @@ resource "azurerm_kubernetes_cluster" "default" {
   }
 
   service_principal {
-    client_id     = "var.appId"
-    client_secret = "var.password"
-    
+    client_id     = var.appId
+    client_secret = var.password
   }
 
   role_based_access_control {
