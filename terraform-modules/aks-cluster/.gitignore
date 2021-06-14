@@ -1,0 +1,2 @@
+terraform-modules\aks-cluster\terraform.tfvars
+.terraform*
